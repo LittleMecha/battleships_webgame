@@ -189,13 +189,61 @@ function createBoard(grid, squares) {
     if (randomDirection === 0) direction = 1
     if (randomDirection === 1) direction = 10
     let randomStart = Math.abs(Math.floor(Math.random() * userSquares.length - (ship.directions[0].length * direction)))
-
+	
+	let rightOverlap = Math.floor(randomStart / 10)
+	if (direction === 1) {
+		rightOverlap = Math.floor((randomStart+(ship.directions[0].length) - 1) / 10)
+		}
     const isTaken = current.some(index => userSquares[randomStart + index].classList.contains('taken'))
-    const isAtRightEdge = current.some(index => (randomStart + index-1) % width === width - 1)
-    const isAtLeftEdge = current.some(index => (randomStart + index-1) % width === 0)
+    
+	const isAtRightEdge = ((rightOverlap) != Math.floor(randomStart / 10))
+	//FUNC FOR NEAR SQUARES DETECTION. CURRENTLY NOT WORKING
+	// let isNear = false
+	// //if ship is on left side
+	// if (Math.floor(randomStart % 10) === 0){
+	// 	//if ship is on top
+	// 	if((randomStart + ship.directions[0].length) < 10){
+	// 		isNear = current.some(index => (userSquares[randomStart + index + 10].classList.contains('taken')) || (userSquares[randomStart + index + 1].classList.contains('taken')))
+	// 	} else
+	// 	//if ship is on bottom
+	// 	if((randomStart + ship.directions[0].length) > 89) {
+	// 		isNear = current.some(index => (userSquares[randomStart + index - 10].classList.contains('taken')) || (userSquares[randomStart + index + 1].classList.contains('taken')))
+	// 	} else {
+	// 	//any other case i.e. in the middle
+	// 		isNear = current.some(index => (userSquares[randomStart + index - 10].classList.contains('taken')) || (userSquares[randomStart + index + 10].classList.contains('taken')) || (userSquares[randomStart + index + 1].classList.contains('taken')))
+	// 	}	
+	// }else if ((Math.floor((randomStart + current[current.length - 1]) % 10) === 9)) { //if ship is on right side
+	// 	//if ship is on top
+	// 	if((randomStart + ship.directions[0].length) < 10){
+	// 		isNear = current.some(index => (userSquares[randomStart + index + 10].classList.contains('taken')) || (userSquares[randomStart - 1].classList.contains('taken')))
+	// 	} else
+	// 	//if ship is on bottom
+	// 	if((randomStart + ship.directions[0].length) > 89) {
+	// 		isNear = current.some(index => (userSquares[randomStart + index - 10].classList.contains('taken')) || (userSquares[randomStart - 1].classList.contains('taken')))
+	// 	} else {
+	// 	//any other case i.e. in the middle
+	// 		isNear = current.some(index => (userSquares[randomStart + index - 10].classList.contains('taken')) || (userSquares[randomStart + index + 10].classList.contains('taken')) || (userSquares[randomStart - 1].classList.contains('taken')))
+	// 	} 
+	// }else {
+	// 	//any other case (middle-middle)
+	// 	//if ship is on top
+	// 	if((randomStart + ship.directions[0].length) < 10){
+	// 		isNear = current.some(index => (userSquares[randomStart + index + 10].classList.contains('taken')) || (userSquares[randomStart + index + 1].classList.contains('taken')) || (userSquares[randomStart - 1].classList.contains('taken')))
+	// 	} else
+	// 	//if ship is on bottom
+	// 	if((randomStart + ship.directions[0].length) > 89) {
+	// 		isNear = current.some(index => (userSquares[randomStart + index - 10].classList.contains('taken')) || (userSquares[randomStart + index + 1].classList.contains('taken')) || (userSquares[randomStart - 1].classList.contains('taken')))
+	// 	} else {
+	// 	//any other case i.e. in the middle
+	// 		isNear = current.some(index => (userSquares[randomStart + index - 10].classList.contains('taken')) || (userSquares[randomStart + index + 10].classList.contains('taken')) || (userSquares[randomStart + index + 1].classList.contains('taken')) || (userSquares[randomStart - 1].classList.contains('taken')))
+	// 	}
+	// }
+	
+	
+    //const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0)
 
-    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach(index => userSquares[randomStart + index].classList.add('taken', ship.name))
-	//if (!isTaken) current.forEach(index => userSquares[randomStart + index].classList.add('taken', ship.name))	
+    //if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach(index => userSquares[randomStart + index].classList.add('taken', ship.name))
+	if (!isTaken&& !isAtRightEdge) current.forEach(index => userSquares[randomStart + index].classList.add('taken', ship.name))	
 
     else generate(ship)
   }
