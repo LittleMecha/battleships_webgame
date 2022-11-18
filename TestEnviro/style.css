@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  background-color: #F3F3F3;
+  overflow-x: hidden;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.grid {
+  margin: 2vmin;
+  display: grid;
+  background-color: hsl(200, 100%, 50%);
+  grid-template-rows: repeat(10, 4.6vmin);
+  grid-template-columns: repeat(10, 4.6vmin);
+}
+.grid div {
+  border: 1px solid hsla(0, 0%, 100%, .2);
+}
+.grid-display {
+  display: flex;
+}
+.ship > div {
+  width: 4.6vmin;
+  height: 4.6vmin;
+}
+
+.taken,
+.ship {
+  position: relative;
+  background-color: hsl(0, 0%, 80%);
+}
+
+.ship {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1vmin;
+  width: calc(4.6vmin * var(--width, 1));
+  height: calc(4.6vmin * var(--height, 1));
+  border-radius: 2.3vmin;
+}
+.destroyer-container {
+  --width: 2;
+}
+.destroyer-container-vertical {
+  --height: 2;
+  --width: 1;
+}
+
+.submarine-container,
+.cruiser-container {
+  --width: 3;
+}
+
+.submarine-container-vertical,
+.cruiser-container-vertical {
+  --height: 3;
+  --width: 1;
+}
+
+.battleship-container {
+  --width: 4;
+}
+
+.battleship-container-vertical {
+  --height: 4;
+  --width: 1;
+}
+
+.carrier-container {
+  --width: 5;
+}
+
+.carrier-container-vertical {
+  --height: 5;
+  --width: 1;
+}
